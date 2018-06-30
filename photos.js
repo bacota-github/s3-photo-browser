@@ -12,6 +12,7 @@ function imageUrl(imageType, imageName) {
 function photos(region, theBucket, thePrefix) {
     bucket = theBucket;
     prefix = thePrefix;
+    document.getElementById("main").style.display = 'none'
     var thumbDiv = document.getElementById("thumbs")
     AWS.config.update({ region: region });
     var s3 = new AWS.S3({
