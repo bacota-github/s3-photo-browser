@@ -88,7 +88,6 @@ function next() {
 }
 
 function closeImage() {
-    console.log("CLOSING")
     document.getElementById("thumbs").style.display = 'inline'
     document.getElementById("main").style.display = 'none'
     return false
