@@ -9,9 +9,11 @@ function imageUrl(imageType, imageName) {
     + '/' + imageName
 }
 
-function photos(region, theBucket, thePrefix) {
+function photos(region, theBucket) {
+    var uri = window.document.documentURI
+    var position = uri.search(theBucket)
+    prefix = uri.substring(position+theBucket.length+1, uri.length-1)
     bucket = theBucket;
-    prefix = thePrefix;
     document.getElementById("main").style.display = 'none'
     var thumbDiv = document.getElementById("thumbs")
     AWS.config.update({ region: region });
@@ -21,7 +23,7 @@ function photos(region, theBucket, thePrefix) {
     });
     s3.makeUnauthenticatedRequest(
         'listObjectsV2',
-        {Bucket: theBucket, Prefix: thePrefix + '/thumb'},
+        {Bucket: theBucket, Prefix: prefix + '/thumb'},
         function(err, s3data) {
             if (err) console.log(err, err.stack)
             else {
@@ -100,4 +102,3 @@ function rotate(n) {
     document.getElementById("main-image").style.transform = rotation
     return false
 }
-
